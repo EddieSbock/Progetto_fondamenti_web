@@ -1,0 +1,5 @@
+//in user.js
+    prendi in considerazione mettere admin:true/false nel modello user
+
+//in index.js
+    todo: implementa la distinzione user e admin.

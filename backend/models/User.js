@@ -27,6 +27,7 @@ SchemaUser.pre('save', async function() { //non uso next perche restuisco una pr
     this.password = await bcrypt.hash(this.password, 10)
     .then(hash => {
         this.password = hash;
+        return this.password;
     })
 });
 

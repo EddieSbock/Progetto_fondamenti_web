@@ -2,7 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 import { User } from "./models/User.js";
+
 
 dotenv.config(); //carica le variabili in .env
 
@@ -45,18 +47,22 @@ app.post("/api/login", async (req, res) => {
         const {email, password} = req.body;
         const user = await User.findOne({email});
         if (user && await user.verificaPassword(password)) {
-            res.status(200).send("Login effettuato con successo");
+
+            const token = jwt.sign(
+                {data: user._id, ruolo: user.ruolo},
+                process.env['JWT_SECRET'],
+                { expiresIn: '2h' });
+
+        res.status(200).json({ message: "Login effettuato", token });
         } else {
-            res.status(400).send("Email o password errati");
+            console.error("Email o password errati");
+            res.status(400).json({ message: "Email o password errati" });
         }
     } catch (error) {
         console.error(error);
         res.status(500).send("Errore di login riprova");
     }
 });
-
-
-
 
 
 app.listen(port, () => {
