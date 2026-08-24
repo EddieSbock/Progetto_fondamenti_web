@@ -23,5 +23,15 @@ const SchemaUser = new mongoose.Schema({
     }
 })
 
+SchemaUser.pre('save', async function() { //non uso next perche restuisco una promise
+    this.password = await bcrypt.hash(this.password, 10)
+    .then(hash => {
+        this.password = hash;
+    })
+});
+
+SchemaUser.methods.verificaPassword = async function(password) {
+    return await bcrypt.compare(password, this.password)
+}
 
 export const User = mongoose.model('User', SchemaUser)
