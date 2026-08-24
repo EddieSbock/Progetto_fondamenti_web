@@ -1,0 +1,26 @@
+import mongoose from 'mongoose';
+
+const SchemaCommento = new mongoose.Schema({
+    contenuto: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 400
+    },
+    autore: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post',
+        required: true
+    },
+    dataCreazione: {
+        type: Date,
+        default: Date.now
+    }
+})
+
+export const Commento = mongoose.model('Commento', SchemaCommento);
