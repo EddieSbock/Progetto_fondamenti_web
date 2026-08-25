@@ -3,7 +3,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import { verificaJWT, verificaRuolo } from "./middleware/auth.js";
 import { User } from "./models/User.js";
+import { Post } from "./models/Post.js";
+import { Comment } from "./models/Comment.js";
 
 
 dotenv.config(); //carica le variabili in .env
@@ -64,6 +67,129 @@ app.post("/api/login", async (req, res) => {
     }
 });
 
+app.get("/api/profile", verificaJWT, async (req, res) => {
+    try {
+        const user = req.user;
+        res.status(200).json({ message: "Profilo utente", user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore nel recupero del profilo" });
+    }
+});
+app.patch("/api/profile", verificaJWT, async (req, res) => {
+    try {
+        const user = req.user;
+        const { nome, email, password } = req.body;
+
+        if (nome) user.nome = nome;
+        if (email) user.email = email;
+        if (password) user.password = password;
+        
+        await user.save();
+        res.status(200).json({ message: "Profilo aggiornato", user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
+
+app.post("/api/post", verificaJWT, verificaRuolo('admin'), async (req, res) => {
+    try {
+        const { titolo, corpo, categorie } = req.body;
+        const autore = req.user._id;
+
+        const post = new Post({ 
+            titolo, 
+            corpo, 
+            categorie, 
+            autore, 
+            voto: 10, 
+            dataCreazione: new Date() 
+        });
+        await post.save();
+        res.status(201).json({ message: "Post creato", post });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
+app.get("/api/post", verificaJWT, async (req, res) => {
+    try {
+        const postati = await Post.find().populate("autore", "nome");
+        res.status(200).json({ message: "Post recuperati", postati });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
+app.patch("/api/post/:id", verificaJWT, verificaRuolo('admin'), async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { titolo, corpo, categorie, voto } = req.body;
+
+        const post = await Post.findById(id);
+
+        if (titolo) post.titolo = titolo;
+        if (corpo) post.corpo = corpo;
+        if (categorie) post.categorie = categorie;
+        if (voto !== undefined) post.voto = voto;
+
+        await post.save();
+        res.status(200).json({ message: "Post aggiornato", post });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
+app.delete("/api/post/:id", verificaJWT, verificaRuolo('admin'), async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Post.findByIdAndDelete(id);
+        res.status(200).json({ message: "Post eliminato" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
+
+app.get("/api/commento/:postId", verificaJWT, async (req, res) => {
+    try {
+
+        const commenti = await Comment.find({post: req.params.postId}).populate("autore", "nome");
+        res.status(200).json({ message: "Commenti recuperati", commenti });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
+app.post("/api/commento", verificaJWT, async (req, res) => {
+    try {
+        const { contenuto, postId } = req.body;
+        const autore = req.user._id;
+
+        const commento = new Comment({ 
+            contenuto, 
+            post: postId, 
+            autore, 
+            dataCreazione: new Date() 
+        });
+        await commento.save();
+        res.status(201).json({ message: "Commento creato", commento });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
+app.delete("/api/commento/:id", verificaJWT, async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Comment.findByIdAndDelete(id);
+        res.status(200).json({ message: "Commento eliminato" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server in ascolto su ${port}`)

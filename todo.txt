@@ -2,4 +2,6 @@
     prendi in considerazione mettere admin:true/false nel modello user
 
 //in index.js
-    todo: implementa la distinzione user e admin.
+    todo: implementa la distinzione user e admin. FATTO
+
+    vedi perche non funge la post dei posts per il voto e categirie/a

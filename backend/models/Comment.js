@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const SchemaCommento = new mongoose.Schema({
+const SchemaComment = new mongoose.Schema({
     contenuto: {
         type: String,
         required: true,
@@ -23,4 +23,4 @@ const SchemaCommento = new mongoose.Schema({
     }
 })
 
-export const Commento = mongoose.model('Commento', SchemaCommento);
+export const Comment = mongoose.model('Comment', SchemaComment);
