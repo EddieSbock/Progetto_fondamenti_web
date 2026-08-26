@@ -69,7 +69,7 @@ app.post("/api/login", async (req, res) => {
 
 app.get("/api/profile", verificaJWT, async (req, res) => {
     try {
-        const user = req.user;
+        const user = await User.findById(req.user._id).select("-password");
         res.status(200).json({ message: "Profilo utente", user });
     } catch (error) {
         console.error(error);
@@ -78,15 +78,31 @@ app.get("/api/profile", verificaJWT, async (req, res) => {
 });
 app.patch("/api/profile", verificaJWT, async (req, res) => {
     try {
-        const user = req.user;
-        const { nome, email, password } = req.body;
+        const user = await User.findById(req.user._id).select("-password");
+        const { nome, email } = req.body;
 
         if (nome) user.nome = nome;
         if (email) user.email = email;
-        if (password) user.password = password;
-        
+
         await user.save();
         res.status(200).json({ message: "Profilo aggiornato", user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
+app.patch("/api/profile/password", verificaJWT, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const { password , nuovaPassword } = req.body;
+
+        if (await user.verificaPassword(password)) {
+            user.password = nuovaPassword;
+            await user.save();
+            res.status(200).json({ message: "Password aggiornata" });
+        } else {
+            res.status(400).json({ message: "Password errata" });
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Errore riprova" });
@@ -128,6 +144,9 @@ app.patch("/api/post/:id", verificaJWT, verificaRuolo('admin'), async (req, res)
         const { titolo, corpo, categorie, voto } = req.body;
 
         const post = await Post.findById(id);
+        if (!post) {
+            return res.status(404).json({ message: "Post inesistente" });
+        }
 
         if (titolo) post.titolo = titolo;
         if (corpo) post.corpo = corpo;
@@ -180,7 +199,7 @@ app.post("/api/commento", verificaJWT, async (req, res) => {
         res.status(500).json({ message: "Errore riprova" });
     }
 });
-app.delete("/api/commento/:id", verificaJWT, async (req, res) => {
+app.delete("/api/commento/:id", verificaJWT, verificaRuolo('admin'), async (req, res) => {
     try {
         const { id } = req.params;
         await Comment.findByIdAndDelete(id);
