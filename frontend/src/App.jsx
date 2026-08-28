@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Esporta_contesto } from './contesto/AuthContext'
 import Navbar from './componenti/Navbar'
 import Home from './pagine/Home'
 import Login from './pagine/Login'
@@ -19,17 +20,18 @@ function App() {
   
 
   return (
-    <Router>
-      <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registrazione" element={<Registrazione />} />
-      </Routes>
-    </Router>
-    
-    
+    <Esporta_contesto>
+      <Router>
+        <Navbar />
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registrazione" element={<Registrazione />} />
+        </Routes>
+      </Router>   
+    </Esporta_contesto>
   )
 }
 export default App

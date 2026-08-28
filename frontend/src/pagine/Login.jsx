@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+//import { crea_contesto } from '../contesto/AuthContext.jsx'
 import './Login.css';
 
 export default function Login() {
@@ -20,7 +21,9 @@ export default function Login() {
                 password
             });
 
-            console.log(risposta.data);
+            console.log(risposta.data.message);
+            //crea_contesto(risposta.data.token);
+
             navigate("/");
         } catch (errore) {
             console.error(errore);
