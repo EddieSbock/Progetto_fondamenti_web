@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-//import { crea_contesto } from '../contesto/AuthContext.jsx'
+import { Contesto } from '../contesto/AuthContext.jsx'
 import './Login.css';
 
 export default function Login() {
@@ -11,6 +11,7 @@ export default function Login() {
     const [errore, setErrore] = React.useState(null);
 
     const navigate = useNavigate();
+    const {crea_contesto} = React.useContext(Contesto)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +23,7 @@ export default function Login() {
             });
 
             console.log(risposta.data.message);
-            //crea_contesto(risposta.data.token);
+            crea_contesto(risposta.data.token);
 
             navigate("/");
         } catch (errore) {

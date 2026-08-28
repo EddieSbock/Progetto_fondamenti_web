@@ -1,10 +1,37 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import { Contesto } from "../contesto/AuthContext.jsx"
+import { useContext } from "react";
+import './Navbar.css'
 
 export default function Navbar() {
+
+    const { token, elimina_contesto }= useContext(Contesto)
+    const navigate = useNavigate()
+
+    const handleLogout=() => {
+        elimina_contesto();
+        navigate("/login")
+    };
+
+
     return (
-        <nav>
-            <Link to="/">Home</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/registrazione">Registrazione</Link>
+        <nav className="navbar">
+
+            <Link className="navbar-link" to="/">Home</Link>
+
+            <div>
+                {token ? (
+                    <>
+                        <Link className="navbar-link" to="/profile">Profilo</Link>
+                        <button className="bottone-navbar" onClick={handleLogout} >Logout</button>
+                    </>
+
+                ):(
+                    <>
+                        <Link className="navbar-link" to="/login">Login</Link>
+                        <Link className="navbar-link" to="/registrazione">Registrazione</Link>
+                    </>
+                )}
+            </div>
         </nav>
     )}
