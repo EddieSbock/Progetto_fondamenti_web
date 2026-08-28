@@ -5,9 +5,9 @@ import axios from 'axios';
 
 export default function Registrazione() {
 
-    const [nome, setNome] = React.useState(" ");
-    const [email, setEmail] = React.useState(" ");
-    const [password, setPassword] = React.useState(" ");
+    const [nome, setNome] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
     const [errore, setErrore] = React.useState(null);
 
     const navigate = useNavigate();
