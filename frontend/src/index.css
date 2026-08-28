@@ -1,0 +1,33 @@
+:root {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+.messaggio-errore {
+    width: 170px;
+    padding: 10px;
+    align-items: center;
+    font-weight: bold;
+    background-color: #ffcccc; 
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+    box-shadow: 0px 3px 0px 0px black;
+}
+
+.titolo-form {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.2); 
+}
+
+.bottone-form {
+    background-color: rgb(255, 246, 152);
+    border: 2px solid black;
+    border-radius: 4px;
+    height: 40px;
+}

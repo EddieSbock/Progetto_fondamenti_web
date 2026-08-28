@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Login.css';
 
 export default function Login() {
 
@@ -29,25 +30,43 @@ export default function Login() {
 
     return (
 
-        <div>
-            <h1>Login</h1>
+        <div className="login-container">
+            <h1 className="titolo-form">Login</h1>
 
-            <form className="formLogin" onSubmit={handleSubmit}>
+            <form className="form-login" onSubmit={handleSubmit}>
 
-                <input
-                type="email"
-                placeholder="Email"
-                value = {email}
-                onChange={e => setEmail(e.target.value)}
-                />
-                <input
-                type="password"
-                placeholder="Password"
-                value = {password}
-                onChange={e => setPassword(e.target.value)}
-                />
-                <button type="submit">Accedi</button>
+                <div className="login-gruppo">
+                    <input
+                        className="login-input"
+                        type="email"
+                        placeholder=" "
+                        id="email"
+                        value = {email}
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                    />
+                    <label htmlFor="email" className="login-label">
+                        Email
+                    </label>
+                </div>
+
+                <div className="login-gruppo">
+                    <input
+                        className="login-input"
+                        type="password"
+                        placeholder=" "
+                        id="password"
+                        value = {password}
+                        onChange={e => setPassword(e.target.value)}
+                        required
+                    />
+                    <label htmlFor="password" className="login-label">
+                        Password
+                    </label>
+                </div>
+
+                <button className="bottone-form" type="submit">Accedi</button>
             </form>
-            {errore && <p>{errore}</p>}
+            {errore && <p className="messaggio-errore">{errore}</p>}
         </div>
     )}

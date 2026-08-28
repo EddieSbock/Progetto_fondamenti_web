@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Registrazione.css'
 
 
 export default function Registrazione() {
@@ -30,31 +31,57 @@ export default function Registrazione() {
     };
 
     return (
-        <div>
-            <h1>Registrazione</h1>
+        <div className="registrazione-container">
+            <h1 className="titolo-form">Registrazione</h1>
 
-            <form className="formRegistrazione" onSubmit={handleSubmit}>
-                <input 
-                type="text"
-                placeholder="Nome utente"
-                value = {nome}
-                onChange={e => setNome(e.target.value)}
-                />
-                <input
-                type="email"
-                placeholder="Email"
-                value = {email}
-                onChange={e => setEmail(e.target.value)}
-                />
-                <input
-                type="password"
-                placeholder="Password"
-                value = {password}
-                onChange={e => setPassword(e.target.value)}
-                />
-                <button type="submit">Registrati</button>
+            <form className="form-registrazione" onSubmit={handleSubmit}>
+                <div className="registrazione-gruppo">
+                    <input 
+                        className="registrazione-input"
+                        type="text"
+                        placeholder=" "
+                        id="nome"
+                        value = {nome}
+                        onChange={e => setNome(e.target.value)}
+                    />
+                    <label htmlFor="nome" className="registrazione-label">
+                        Nome Utente
+                    </label>
+                </div>
+
+                <div className="registrazione-gruppo">                   
+                    
+                    <input
+                        className="registrazione-input"
+                        type="email"
+                        placeholder=" "
+                        id="email"
+                        value = {email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <label htmlFor="email" className="registrazione-label">
+                        Email
+                    </label>
+                </div>
+
+                <div className="registrazione-gruppo">   
+                    
+                    <input
+                        className="registrazione-input"
+                        type="password"
+                        placeholder=" "
+                        id="password"
+                        value = {password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <label htmlFor="password" className="registrazione-label">
+                        Password
+                    </label>
+                </div>
+
+                <button className="bottone-form" type="submit">Registrati</button>
             </form>
-            {errore && <p>{errore}</p>}
+            {errore && <p className="messaggio-errore">{errore}</p>}
         </div>
 
     )
