@@ -18,7 +18,9 @@ export default function Navbar() {
         <nav className="navbar">
 
             <Link className="navbar-link" to="/">Home</Link>
-
+            <div>
+                <Link className="navbar-titolo">REFILM</Link>
+            </div>
             <div>
                 {token ? (
                     <>
@@ -29,7 +31,7 @@ export default function Navbar() {
                 ):(
                     <>
                         <Link className="navbar-link" to="/login">Login</Link>
-                        <Link className="navbar-link" to="/registrazione">Registrazione</Link>
+                        <Link className="navbar-link" to="/registrazione">Registrati</Link>
                     </>
                 )}
             </div>
