@@ -1,0 +1,57 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.barra-home {
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    gap: 10px;
+    min-height: 50px;
+}
+
+.barra-ricerca {
+    padding: 5px 10px 0px 0px;
+}
+
+.ricerca-input {
+    font-size: 16px;
+  display: block;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.ricerca-input::placeholder {
+    font-family: inherit;
+    font-weight: 600;
+    color: black;
+    font-style: italic;
+}
+
+.corpo-home{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+.corpo-post {
+    flex: 1;
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+.corpo-sidebar {
+    width: 200px ;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sidebar-sezione {
+    min-height: 100px;
+}
