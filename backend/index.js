@@ -111,15 +111,18 @@ app.patch("/api/profile/password", verificaJWT, async (req, res) => {
 
 app.post("/api/post", verificaJWT, verificaRuolo('admin'), async (req, res) => {
     try {
-        const { titolo, corpo, categorie } = req.body;
+        const { titolo, corpo, categorie, registi, cast, riassunto, voto } = req.body;
         const autore = req.user._id;
 
         const post = new Post({ 
             titolo, 
-            corpo, 
+            corpo,
+            registi,
+            cast,
+            riassunto,
             categorie, 
             autore, 
-            voto: 10, 
+            voto, 
             dataCreazione: new Date() 
         });
         await post.save();
@@ -129,9 +132,23 @@ app.post("/api/post", verificaJWT, verificaRuolo('admin'), async (req, res) => {
         res.status(500).json({ message: "Errore riprova" });
     }
 });
-app.get("/api/post", verificaJWT, async (req, res) => {
+app.get("/api/post", async (req, res) => {
     try {
-        const postati = await Post.find().populate("autore", "nome");
+
+        const {categoria, ricerca} = req.query;
+        const query = {};
+
+        if (categoria) {
+            query.categorie = categoria;
+        }
+
+        if (ricerca) {
+            query.$or = [
+                { titolo: { $regex: ricerca, $options: 'i' } },
+                { corpo: { $regex: ricerca, $options: 'i' } }
+            ];
+        }
+        const postati = await Post.find(query).populate("autore", "nome");
         res.status(200).json({ message: "Post recuperati", postati });
     } catch (error) {
         console.error(error);

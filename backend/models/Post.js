@@ -11,6 +11,18 @@ const SchemaPost = new mongoose.Schema({
         minlength: 10,
         maxlength: 1000,
     },
+    registi: {
+        type : [String],
+        default: []
+    },
+    cast: {
+        type : [String],
+        default: []    
+    },
+    riassunto: {
+        type : String,
+        default: " "
+    },
     autore: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -23,7 +35,6 @@ const SchemaPost = new mongoose.Schema({
     voto: {
         type: Number,
         default: 0,
-        required: true
     },
     categorie: {
         type: [String],
