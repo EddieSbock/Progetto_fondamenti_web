@@ -14,13 +14,16 @@ export default function Home() {
     const [ricerca, setRicerca] = React.useState("")
     const [categoria, setCategoria] = React.useState("")
 
+    const categorie_home = ['azione', 'commedia', 'drammatico', 
+        'fantascienza', 'horror', 'romantico', 'thriller', 'animazione', 
+        'documentario', 'avventura', 'fantasy', 'storico','grottesco']
 
 
 React.useEffect(() => {
     const handlePost = async () => {
         try {
 
-            const HomePost = await axios.get("http://localhost:3000/api/post?limit=5",{
+            const HomePost = await axios.get("http://localhost:3000/api/post",{
                     params: {
                         categoria: categoria || undefined,
                         ricerca: ricerca || undefined,
@@ -64,6 +67,19 @@ React.useEffect(() => {
                 <aside className="corpo-sidebar">
                     <div className="sidebar-sezione">
                         <h3>Categorie</h3>
+                        <section className="sezione-categorie">
+                            
+                            {categorie_home.map((scelta) => (
+                            <button
+                            type="button"
+                            key={scelta}
+                            className={categoria === scelta ? "categoria selezionata" : "categoria"}
+                            onClick={() => setCategoria(scelta === categoria ? "" : scelta)}
+                            >
+                            {scelta}
+                            </button>
+                            ))}
+                        </section>
                     </div>
 
                     <div className="sidebar-sezione">

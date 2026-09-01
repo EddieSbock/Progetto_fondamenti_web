@@ -11,17 +11,19 @@ const SchemaPost = new mongoose.Schema({
         minlength: 10,
         maxlength: 1000,
     },
+
+    //implementare poi degli array per registri e cast
     registi: {
-        type : [String],
-        default: []
+        type : String,
+        default: ""
     },
     cast: {
-        type : [String],
-        default: []    
+        type : String,
+        default: ""    
     },
     riassunto: {
         type : String,
-        default: " "
+        default: ""
     },
     autore: {
         type: mongoose.Schema.Types.ObjectId,
@@ -36,10 +38,11 @@ const SchemaPost = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    categorie: {
-        type: [String],
+    categorie: [{
+        type: String,
+        enum: ['azione', 'commedia', 'drammatico', 'fantascienza', 'horror', 'romantico', 'thriller', 'animazione', 'documentario', 'avventura', 'fantasy', 'storico','grottesco'],
         required: true
-    }
+    }]
 })
 
 export const Post = mongoose.model('Post', SchemaPost)
