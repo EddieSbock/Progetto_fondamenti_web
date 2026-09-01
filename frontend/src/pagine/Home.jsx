@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Contesto } from "../contesto/AuthContext";
 import "./Home.css";
@@ -13,6 +13,7 @@ export default function Home() {
     const [errore, setErrore] = React.useState(null)
     const [ricerca, setRicerca] = React.useState("")
     const [categoria, setCategoria] = React.useState("")
+    const [topPost, setTopPost] = React.useState([])
 
     const categorie_home = ['azione', 'commedia', 'drammatico', 
         'fantascienza', 'horror', 'romantico', 'thriller', 'animazione', 
@@ -40,7 +41,18 @@ React.useEffect(() => {
     handlePost();
 }, [ricerca, categoria]);
 
-
+React.useEffect(() => {
+    const handleTopPost = async () => {
+        try {
+            const TopPost = await axios.get("http://localhost:3000/api/post/top")
+            setTopPost(TopPost.data.miglioriPost)
+        } catch (errore) {
+            console.error(errore)
+            setErrore("Problema col recuperare i migliori post")
+        }
+    };
+    handleTopPost();
+}, []);
 
     return (
         <div className="home">
@@ -84,6 +96,16 @@ React.useEffect(() => {
 
                     <div className="sidebar-sezione">
                         <h3>Top Recensioni</h3>
+                        <section className="sezione-topPost">
+                            {topPost.map((post) => (
+                                <Link to={`/post/${post._id}`} key={post._id} className="topPost-link">
+                                    <div className="topPost-card">
+                                        <h4 className="topPost-titolo">{post.titolo}</h4>
+                                        <span className="topPost-voto">Voto: {post.voto}</span>
+                                    </div>
+                                </Link>
+                            ))}
+                        </section>
                     </div>
                     <div className="sidebar-sezione-img">
                         <img className="sidebar-img" src={terminator}/>
