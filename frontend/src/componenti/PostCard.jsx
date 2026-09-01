@@ -19,7 +19,7 @@ export function PostCard({ post }) {
                 <span className="post-card-titolo"> {post.titolo} </span>
                 <p className="post-card-dati">{post.autore.nome} - {dataFromattata}</p>
                 <p className="post-card-descrizione">
-                    {post.descrizione || "Clicca per visualizzare i dettagli dell'articolo."}
+                    {post.riassunto || "Clicca per visualizzare i dettagli dell'articolo."}
                 </p>
             </div>
         </Link>

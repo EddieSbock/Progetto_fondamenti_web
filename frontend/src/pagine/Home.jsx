@@ -1,10 +1,8 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { Contesto } from "../contesto/AuthContext";
 import "./Home.css";
 import terminator from "../assets/terminator.png"
-import "../componenti/PostCard"
 import { PostCard } from "../componenti/PostCard";
 
 export default function Home() {

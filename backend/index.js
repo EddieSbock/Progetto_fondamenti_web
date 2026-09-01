@@ -155,10 +155,21 @@ app.get("/api/post", async (req, res) => {
         res.status(500).json({ message: "Errore riprova" });
     }
 });
+app.get("/api/post/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await Post.findById(id).populate("autore", "nome");
+
+        res.status(200).json({ message: "Post recuperato", post });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+});
 app.patch("/api/post/:id", verificaJWT, verificaRuolo('admin'), async (req, res) => {
     try {
         const { id } = req.params;
-        const { titolo, corpo, categorie, voto } = req.body;
+        const { titolo, corpo, categorie, registi, cast, riassunto, voto } = req.body;
 
         const post = await Post.findById(id);
         if (!post) {
@@ -169,6 +180,9 @@ app.patch("/api/post/:id", verificaJWT, verificaRuolo('admin'), async (req, res)
         if (corpo) post.corpo = corpo;
         if (categorie) post.categorie = categorie;
         if (voto !== undefined) post.voto = voto;
+        if (registi) post.registi = registi;
+        if (cast) post.cast = cast;
+        if (riassunto) post.riassunto = riassunto;
 
         await post.save();
         res.status(200).json({ message: "Post aggiornato", post });

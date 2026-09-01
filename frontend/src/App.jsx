@@ -6,6 +6,8 @@ import Navbar from './componenti/Navbar'
 import Home from './pagine/Home'
 import Login from './pagine/Login'
 import Registrazione from './pagine/Registrazione'
+import ModificaPost from './pagine/ModificaPost'
+import VisualizzaPost from './pagine/VisualizzaPost'
 import './App.css'
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registrazione" element={<Registrazione />} />
+          <Route path="/modifica-post/:id" element={<ModificaPost />} />
+          <Route path="/post/:id" element={<VisualizzaPost />} />
         </Routes>
       </Router>   
     </Esporta_contesto>
