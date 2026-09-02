@@ -1,10 +1,12 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Contesto } from "../contesto/AuthContext";
 import axios from "axios";
 import "./VisualizzaPost.css";
 
 export default function VisualizzaPost() {
+
+    const navigate = useNavigate();
 
     const { id } = useParams();
     const { token } = React.useContext(Contesto);
@@ -50,6 +52,21 @@ React.useEffect(() => {
     handleAdmin();
 }, [token]);
 
+    const handleDelete = async () => {
+
+        try {
+            await axios.delete(`http://localhost:3000/api/post/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log("Post eliminato con successo");
+            navigate("/");
+        } catch (errore) {
+            console.error(errore);
+        }
+    }
+
     return (
         <div className="visualizza-post">
             <div className="post-header">
@@ -87,9 +104,14 @@ React.useEffect(() => {
                 )}
                 <section className="post-modifica">
                     {isAdmin && (
-                    <Link to={`/modifica-post/${id}`} className="modifica-link">
-                        Modifica Post
-                    </Link>
+                    <div>
+                        <Link to={`/modifica-post/${id}`} className="modifica-link">
+                            Modifica Post
+                        </Link>
+                        <button className="elimina-link" onClick={handleDelete}>
+                            Elimina Post
+                        </button>
+                    </div>
                 )}
                 </section>
             
