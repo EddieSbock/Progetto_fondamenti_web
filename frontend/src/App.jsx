@@ -31,6 +31,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registrazione" element={<Registrazione />} />
+          <Route path="/modifica-post" element={<ModificaPost />} />
           <Route path="/modifica-post/:id" element={<ModificaPost />} />
           <Route path="/post/:id" element={<VisualizzaPost />} />
         </Routes>

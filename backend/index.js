@@ -155,6 +155,16 @@ app.get("/api/post", async (req, res) => {
         res.status(500).json({ message: "Errore riprova" });
     }
 });
+app.get("/api/post/top", async (req, res) => {
+    try {
+        const miglioriPost = await Post.find().sort({ voto: -1}).limit(5).select("titolo voto id");
+        
+        res.status(200).json({ message: "Migliori post recuperati", miglioriPost });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+})
 app.get("/api/post/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -201,17 +211,6 @@ app.delete("/api/post/:id", verificaJWT, verificaRuolo('admin'), async (req, res
         res.status(500).json({ message: "Errore riprova" });
     }
 });
-
-app.get("/api/post/top", async (req, res) => {
-    try {
-        const miglioriPost = await Post.find().sort({ voto: -1}).limit(5).select("titolo voto id");
-        
-        res.status(200).json({ message: "Migliori post recuperati", miglioriPost });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Errore riprova" });
-    }
-})
 
 app.get("/api/commento/:postId", verificaJWT, async (req, res) => {
     try {
