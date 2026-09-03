@@ -9,7 +9,7 @@ export const Esporta_contesto = ({children}) => {
     useEffect(() => {
         const Recuperato = localStorage.getItem("token")
         if(Recuperato){setToken(Recuperato)}
-    })
+    }, [])
 
     const crea_contesto = (login_token) => {
         localStorage.setItem("token", login_token)

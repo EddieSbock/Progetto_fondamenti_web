@@ -83,19 +83,28 @@ app.get("/api/profile", verificaJWT, async (req, res) => {
 });
 app.patch("/api/profile", verificaJWT, async (req, res) => {
     try {
-        const user = await User.findById(req.user._id).select("-password");
+
         const { nome, email } = req.body;
-
-        if (nome) user.nome = nome;
-        if (email) user.email = email;
-
-        await user.save();
+        const user = await User.findByIdAndUpdate(req.user._id,
+            { nome, email },
+            { new: true}
+        ).select("-password");
+        
         res.status(200).json({ message: "Profilo aggiornato", user });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Errore riprova" });
     }
 });
+app.get("/api/profile/password", verificaJWT, async (req,res) => {
+    try {
+        const password = await User.findById(req.user._id).select("password");
+        res.status(200).json({password})
+    } catch(errore) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+})
 app.patch("/api/profile/password", verificaJWT, async (req, res) => {
     try {
         const user = await User.findById(req.user._id);

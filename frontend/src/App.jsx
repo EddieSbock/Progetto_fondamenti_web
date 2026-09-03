@@ -8,6 +8,7 @@ import Login from './pagine/Login'
 import Registrazione from './pagine/Registrazione'
 import ModificaPost from './pagine/ModificaPost'
 import VisualizzaPost from './pagine/VisualizzaPost'
+import Profilo from './pagine/Profilo'
 import './App.css'
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/modifica-post" element={<ModificaPost />} />
           <Route path="/modifica-post/:id" element={<ModificaPost />} />
           <Route path="/post/:id" element={<VisualizzaPost />} />
+          <Route path="/profile" element={<Profilo/>}/>
         </Routes>
       </Router>   
     </Esporta_contesto>
