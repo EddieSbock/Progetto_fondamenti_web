@@ -1,0 +1,169 @@
+.commenti-container {
+  margin-top: 5rem;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 4px solid #000000;
+  box-shadow: 6px 6px 0px #000000;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.chat-titolo {
+  margin: 0 0 1.25rem 0;
+  font-size: 1.4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  border-bottom: 3px solid #000000;
+  padding-bottom: 0.5rem;
+}
+
+.commenti-lista {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 200px;
+  gap: 10px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.commenti-lista::-webkit-scrollbar {
+  width: 8px;
+}
+
+.commenti-lista::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-left: 2px solid #000000;
+}
+
+.commenti-lista::-webkit-scrollbar-thumb {
+  background: #000000;
+}
+
+.singolo-commento {
+  background-color: #ffffff;
+  border: 3px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  padding: 0.85rem 1rem;
+  transition: transform 0.1s ease;
+}
+
+.singolo-commento:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #000000;
+}
+
+.commento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.25rem;
+}
+
+.commento-autore {
+  font-weight: 900;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  background-color: #ffd700;
+  border: 1px solid #000000;
+  padding: 1px 6px;
+}
+
+.commento-dati {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #333333;
+}
+
+.commento-testo {
+  margin: 0.4rem 0 0 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.chat-form {
+  margin-top: 1rem;
+}
+
+.commenti-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+.commenti-input .input-inserito {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  min-height: 65px;
+  max-height: 200px;
+  resize: none;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  border: 3px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  outline: none;
+  background: #fcfcfc;
+}
+
+.input-inserito::-webkit-scrollbar {
+    display: none;
+}
+
+.commenti-input .input-inserito:focus {
+  background-color: #ffffff;
+  box-shadow: 5px 5px 0px #ffd700;
+}
+
+.bottone-commenti {
+  background-color: #ffd700;
+  color: #000000;
+  border: 3px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.bottone-commenti:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000000;
+  background-color: #ffcc00;
+}
+
+.bottone-commenti:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px #000000;
+}
+
+.avviso-login {
+  border: 3px dashed #000000;
+  background-color: #f7f7f7;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.avviso-login p {
+  margin: 0;
+}

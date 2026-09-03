@@ -1,12 +1,20 @@
 .visualizza-post {
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    margin-top: 30px;
+    flex-direction: row;
+    padding: 10px;
+    gap: 5px;
+    margin-top: 60px;
     margin-left: 40px;
     margin-right: 40px;
 }
 
+.chat-container {
+    width: 20%;
+}
+
+.post-container {
+    width: 80%;
+}
 .post-header {
     display: flex;
     flex-direction: row;

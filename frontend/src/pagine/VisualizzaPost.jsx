@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { Contesto } from "../contesto/AuthContext";
 import axios from "axios";
 import "./VisualizzaPost.css";
+import { ChatCommenti } from "../componenti/ChatCommenti"
 
 export default function VisualizzaPost() {
 
@@ -69,6 +70,7 @@ React.useEffect(() => {
 
     return (
         <div className="visualizza-post">
+            <div className="post-container">
             <div className="post-header">
                 {post && (
                     <div className="post-cover">
@@ -116,6 +118,10 @@ React.useEffect(() => {
                 </section>
             
             </div>
+            </div>
+            <aside className="chat-container">
+                <ChatCommenti postId={id} />
+            </aside>
         </div>
     )
 }
