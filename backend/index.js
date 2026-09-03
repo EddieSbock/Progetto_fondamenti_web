@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import http from "http";
+import { initSocket, socketMiddlewere } from "./middleware/socket.js";
 import { verificaJWT, verificaRuolo } from "./middleware/auth.js";
 import { User } from "./models/User.js";
 import { Post } from "./models/Post.js";
@@ -23,6 +25,9 @@ db.once('open', () => {console.log('Connessione avvenuta con mongoose')});
 app.use(cors());
 app.use(express.json());
 
+const server = http.createServer(app);
+initSocket(server);
+app.use(socketMiddlewere);
 
 app.get("/api/hello", (req, res) => {
     res.send("Sono il backend")
@@ -212,7 +217,7 @@ app.delete("/api/post/:id", verificaJWT, verificaRuolo('admin'), async (req, res
     }
 });
 
-app.get("/api/commento/:postId", verificaJWT, async (req, res) => {
+app.get("/api/commento/:postId", async (req, res) => {
     try {
 
         const commenti = await Comment.find({post: req.params.postId}).populate("autore", "nome");
@@ -234,7 +239,10 @@ app.post("/api/commento", verificaJWT, async (req, res) => {
             dataCreazione: new Date() 
         });
         await commento.save();
-        res.status(201).json({ message: "Commento creato", commento });
+
+        const commentoPostato = await Comment.findById(commento._id).populate("autore", "nome")
+        req.SocketCommenti.to(postId).emit("ricevi_commento", commentoPostato)
+        res.status(201).json({ message: "Commento creato", commentoPostato });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Errore riprova" });
@@ -251,6 +259,8 @@ app.delete("/api/commento/:id", verificaJWT, verificaRuolo('admin'), async (req,
     }
 });
 
-app.listen(port, () => {
+
+
+server.listen(port, () => {
     console.log(`Server in ascolto su ${port}`)
 })
