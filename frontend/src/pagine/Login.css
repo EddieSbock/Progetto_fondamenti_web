@@ -52,7 +52,7 @@
   left: 10px;
   top: 30%;
   transition: 0.2s ease all;
-  background-color: var(--bianco);
+  background-color: #00000000;
   padding: 0 4px;
 }
 

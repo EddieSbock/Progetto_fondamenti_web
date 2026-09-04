@@ -42,7 +42,11 @@ const SchemaPost = new mongoose.Schema({
         type: String,
         enum: ['azione', 'commedia', 'drammatico', 'fantascienza', 'horror', 'romantico', 'thriller', 'animazione', 'documentario', 'avventura', 'fantasy', 'storico','grottesco'],
         required: true
-    }]
+    }],
+    cover: {
+        type: String,
+        default: ""
+    }
 })
 
 export const Post = mongoose.model('Post', SchemaPost)

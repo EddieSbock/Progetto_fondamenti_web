@@ -12,6 +12,10 @@
     --rosa: #ff70a6;
     --grigio-chiaro: #e9dfc9;
     --grigio: #665f55;
+
+}
+:root::-webkit-scrollbar {
+    display: none;
 }
 
 body {

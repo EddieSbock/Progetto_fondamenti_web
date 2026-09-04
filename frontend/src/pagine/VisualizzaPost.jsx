@@ -74,7 +74,7 @@ React.useEffect(() => {
             <div className="post-header">
                 {post && (
                     <div className="post-cover">
-                        <img className="post-cover-img" src={post.immagine} alt={post.titolo} />
+                        <img className="post-cover-img" src={post.cover} alt={post.titolo} />
                     </div>
                 )}
                 {post && (

@@ -108,7 +108,7 @@ app.get("/api/profile/password", verificaJWT, async (req,res) => {
 app.patch("/api/profile/password", verificaJWT, async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
-        const { password , nuovaPassword } = req.body;
+        const { password, nuovaPassword } = req.body;
 
         if (await user.verificaPassword(password)) {
             user.password = nuovaPassword;
@@ -125,7 +125,7 @@ app.patch("/api/profile/password", verificaJWT, async (req, res) => {
 
 app.post("/api/post", verificaJWT, verificaRuolo('admin'), async (req, res) => {
     try {
-        const { titolo, corpo, categorie, registi, cast, riassunto, voto } = req.body;
+        const { titolo, corpo, categorie, registi, cast, riassunto, voto, cover } = req.body;
         const autore = req.user._id;
 
         const post = new Post({ 
@@ -136,8 +136,9 @@ app.post("/api/post", verificaJWT, verificaRuolo('admin'), async (req, res) => {
             riassunto,
             categorie, 
             autore, 
-            voto, 
-            dataCreazione: new Date() 
+            voto,
+            cover, 
+            dataCreazione: new Date()
         });
         await post.save();
         res.status(201).json({ message: "Post creato", post });
@@ -193,7 +194,7 @@ app.get("/api/post/:id", async (req, res) => {
 app.patch("/api/post/:id", verificaJWT, verificaRuolo('admin'), async (req, res) => {
     try {
         const { id } = req.params;
-        const { titolo, corpo, categorie, registi, cast, riassunto, voto } = req.body;
+        const { titolo, corpo, categorie, registi, cast, riassunto, voto, cover } = req.body;
 
         const post = await Post.findById(id);
         if (!post) {
@@ -207,6 +208,7 @@ app.patch("/api/post/:id", verificaJWT, verificaRuolo('admin'), async (req, res)
         if (registi) post.registi = registi;
         if (cast) post.cast = cast;
         if (riassunto) post.riassunto = riassunto;
+        if (cover) post.cover = cover;
 
         await post.save();
         res.status(200).json({ message: "Post aggiornato", post });

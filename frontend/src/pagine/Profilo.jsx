@@ -11,6 +11,7 @@ export default function Profilo() {
     const [nome, setNome] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [nuovaPassword, setNuovaPassword] = React.useState("");
     const [mostraPassword, setMostraPassword] = React.useState(false);
 
     const navigate = useNavigate();
@@ -36,8 +37,7 @@ React.useEffect(() => {
 
 }, [token])
 
-const modificaProfilo = async (e) => {
-    e.preventDefault();
+const modificaProfilo = async () => {
 
         try {
             await axios.patch("http://localhost:3000/api/profile",
@@ -50,26 +50,32 @@ const modificaProfilo = async (e) => {
         }   
     }
 
-const modificaPassword = async (e) => {
-    e.preventDefault();
-
+const modificaPassword = async () => {
         try {
             await axios.patch("http://localhost:3000/api/profile/password",
-                {password},
+                {password, nuovaPassword},
                 {headers: {Authorization: `Bearer ${token}`}}
             );
-            navigate("/")
         } catch(errore) {
             console.log(errore)
         }   
     }
 
+const inviaForm = async(e) => {
+    e.preventDefault();
+
+    if (nuovaPassword !== "") {
+        await modificaPassword()
+    }
+    await modificaProfilo();
+
+}
     return (
 
         <div className="login-container">
             <h1 className="titolo-form">Profilo</h1>
 
-            <form className="form-login" onSubmit={modificaProfilo && modificaPassword}>
+            <form className="form-login" onSubmit={inviaForm}>
 
                 <div className="login-gruppo">
                     <input
@@ -109,19 +115,32 @@ const modificaPassword = async (e) => {
                         id="password"
                         value = {password}
                         onChange={e => setPassword(e.target.value)}
-                        required
+                    />
+                    <label htmlFor="password" className="login-label">
+                        Password
+                    </label>
+                </div>
+
+                <div className="login-gruppo">
+                    <input
+                        className="login-input"
+                        type={mostraPassword? "text":"password"}
+                        placeholder=" "
+                        id="password"
+                        value = {nuovaPassword}
+                        onChange={e => setNuovaPassword(e.target.value)}
                     />
                     <label htmlFor="password" className="login-label">
                         Nuova Password
                     </label>
-                    <button 
+                </div>
+                <button 
+                        type= "button"
                         className='occhio-password' 
                         onClick={() => setMostraPassword(!mostraPassword)}
                     >
                         Occhio
                     </button>
-                </div>
-
                 <button className="bottone-form" type="submit">Modifica</button>
             </form>
         </div>
