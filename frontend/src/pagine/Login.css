@@ -8,7 +8,7 @@
 }
 
 .form-login {
-    background-color: white;
+    background-color: var(--bianco);
     padding: 40px;
     width: 350px;
     display: flex;
@@ -18,13 +18,13 @@
     position: relative;
     z-index: 10;
 
-    border: 3px solid black;
-    box-shadow: 0px 8px 0px 0px black;
-    border-radius: 8px;
+    border: 3px solid var(--nero);
+    box-shadow: 8px 8px 0 var(--nero);
+    border-radius: 0;
     transition:0.2 ease;
 }
 .form-login:hover {
-  box-shadow: 0px 4px 0px 0px black;;
+  box-shadow: 4px 4px 0 var(--nero);
 }
 
 
@@ -33,18 +33,18 @@
   padding: 12px 10px 12px 10px;
   display: block;
   width: 40%;
-  border: 2px solid #000000;
-  border-radius: 4px;
+  border: 3px solid var(--nero);
+  border-radius: 0;
   box-sizing: border-box;
 }
 
 .login-input:focus {
   outline: none;
-  border-color: #009758;
+  border-color: var(--celeste);
 }
 
 .login-label {
-  color: #999;
+  color: var(--grigio);
   font-size: 16px;
   font-weight: normal;
   position: absolute;
@@ -52,7 +52,7 @@
   left: 10px;
   top: 30%;
   transition: 0.2s ease all;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: var(--bianco);
   padding: 0 4px;
 }
 
@@ -61,7 +61,7 @@
   left: 0px;
   top: -17px;
   font-size: 12px;
-  color: #009758;
+  color: var(--celeste);
 }
 
 .login-gruppo {

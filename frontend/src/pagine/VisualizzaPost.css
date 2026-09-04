@@ -26,7 +26,7 @@
     height: 300px;
     margin-right: 20px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 3px solid var(--nero);
 }
 
 .post-cover-img {
@@ -56,12 +56,12 @@
     padding: 5px 10px;
     border: 3px solid black;
     border-radius: 4px;
-    background-color: white;
-    color: black;
+    background-color: var(--bianco);
+    color: var(--ink);
     margin-right: 5px;
     margin-left: 5px;
 
-    box-shadow: 0px 2px 0px 0px rgb(0, 0, 0);
+    box-shadow: 3px 3px 0 var(--nero);
     text-transform: uppercase;
     font-weight: 600;
     font-family: inherit;
@@ -104,19 +104,19 @@
 .modifica-link {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #ffc800;
-    color: #000000;
+    background-color: var(--giallo);
+    color: var(--nero);
     text-decoration: none;
     font-weight: bold;
     border-radius: 5px;
 
-    border: 3px solid #000000;
-    box-shadow: 0 3px #000000;
+    border: 3px solid var(--nero);
+    box-shadow: 0 3px var(--nero);
     transition: all 0.3s ease;
 }
 .modifica-link:hover {
-    background-color: #d0a300;
-    box-shadow: 0 2px #000000;
+    background-color: var(--giallo-scuro);
+    box-shadow: 0 2px var(--nero);
     transform: translateY(1px);
 }
 
@@ -129,18 +129,18 @@
     appearance: none;
     padding: 10px 20px;
     margin-left: 10px;
-    background-color: #ff0000;
-    color: #ffffff;
+    background-color: var(--rosso);
+    color: var(--giallo);
     text-decoration: none;
     font-weight: bold;
     border-radius: 5px;
 
-    border: 3px solid #000000;
-    box-shadow: 0 3px #000000;
+    border: 3px solid var(--nero);
+    box-shadow: 0 3px var(--nero);
     transition: all 0.3s ease;
 }
 .elimina-link:hover {
-    background-color: #cc0000;
-    box-shadow: 0 2px #000000;
+    background-color: #e04348;
+    box-shadow: 0 2px var(--nero);
     transform: translateY(1px);
 }

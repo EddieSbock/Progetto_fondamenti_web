@@ -23,19 +23,20 @@
 .ricerca-input {
     font-size: 16px;
   display: block;
-  border: 2px solid #000000;
-  border-radius: 4px;
+    border: 3px solid var(--nero);
+    border-radius: 0;
+    background-color: var(--bianco);
   box-sizing: border-box;
 }
 .ricerca-input::placeholder {
     font-family: inherit;
     font-weight: 600;
-    color: black;
+    color: var(--grigio);
     font-style: italic;
 }
 .ricerca-input:focus {
     outline: none;
-    border-color: rgb(201, 40, 237);
+    border-color: var(--celeste);
 }
 
 .barra-utility {
@@ -90,18 +91,18 @@
 }
 
 .categoria.selezionata {
-    background-color: rgb(51, 133, 27);
-    color: white;
+    background-color: var(--celeste);
+    color: var(--nero);
 }
 
 .categoria {
     padding: 5px 10px;
-    border: 3px solid black;
-    border-radius: 4px;
-    background-color: white;
-    color: black;
+    border: 3px solid var(--nero);
+    border-radius: 0;
+    background-color: var(--bianco);
+    color: var(--nero);
 
-    box-shadow: 0px 2px 0px 0px rgb(0, 0, 0);
+    box-shadow: 3px 3px 0 var(--nero);
     cursor: pointer;
     text-transform: uppercase;
     font-weight: 600;
@@ -113,9 +114,9 @@
 }
 .categoria:hover {
     transform: translate(0px, 2px);
-    box-shadow: 0px 0px 0px 0px rgb(0, 0, 0);
-    background-color: rgb(72, 186, 37);
-    color: white;
+    box-shadow: 0 0 0 var(--nero);
+    background-color: var(--rosa);
+    color: var(--nero);
 }
 
 .sezione-topPost {
@@ -135,10 +136,10 @@
     justify-content: space-between;
     gap: 10px;
     padding: 8px 10px;
-    background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 6px;
-    box-shadow: 0 3px 0 #000;
+    background-color: var(--bianco);
+    border: 3px solid var(--nero);
+    border-radius: 0;
+    box-shadow: 3px 3px 0 var(--nero);
 }
 
 .topPost-titolo {
@@ -155,11 +156,11 @@
 .topPost-voto {
     margin: 0;
     padding: 4px 8px;
-    background-color: #f4f4f4;
-    border: 2px solid #000;
-    border-radius: 999px;
+    background-color: var(--giallo);
+    border: 2px solid var(--nero);
+    border-radius: 0;
     font-size: 0.75rem;
     font-weight: 800;
-    color: #000;
+    color: var(--nero);
     white-space: nowrap;
 }
