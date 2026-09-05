@@ -139,7 +139,7 @@ const inviaForm = async(e) => {
                         className='occhio-password' 
                         onClick={() => setMostraPassword(!mostraPassword)}
                     >
-                        Occhio
+                        {mostraPassword === true? "Nascondi" : "Mostra"}
                     </button>
                 <button className="bottone-form" type="submit">Modifica</button>
             </form>

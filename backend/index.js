@@ -296,6 +296,26 @@ app.post("/api/richieste", verificaJWT, async (req, res) => {
         res.status(500).json({ message: "Errore" });
     }
 })
+app.patch("/api/richieste/:id", verificaJWT, verificaRuolo("admin"), async (req,res) => {
+    try {
+        const richiesta = await Richieste.findById(req.params.id)
+
+        await User.findByIdAndUpdate(richiesta.user,
+            {ruolo: "admin"},{new: true})
+        res.status(201).json({ message: "Richiesta Approvata" });
+    } catch(error) {
+        res.status(500).json({ message: "Errore" });
+    }
+})
+app.delete("/api/richieste/:id", verificaJWT, verificaRuolo("admin"), async (req,res) => {
+    try {
+        const { id } = req.params
+        await Richieste.findByIdAndDelete(id);
+        res.status(201).json({ message: "Richiesta Eliminata" });
+    } catch(error) {
+        res.status(500).json({ message: "Errore" });
+    }
+})
 
 
 

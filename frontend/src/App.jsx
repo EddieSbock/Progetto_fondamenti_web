@@ -10,6 +10,7 @@ import VisualizzaPost from './pagine/VisualizzaPost'
 import Profilo from './pagine/Profilo'
 import { Footer } from './componenti/Footer'
 import { ProtezioneRotte } from './utility/ProtezioneRotte'
+import { ElencoRichieste } from './pagine/ElencoRichieste'
 import './App.css'
 
 function App() {
@@ -33,11 +34,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registrazione" element={<Registrazione />} />
+          <Route path="/post/:id" element={<VisualizzaPost />} />
           <Route element={<ProtezioneRotte/>}>
             <Route path="/modifica-post" element={<ModificaPost />} />
             <Route path="/modifica-post/:id" element={<ModificaPost />} />
-            <Route path="/post/:id" element={<VisualizzaPost />} />
             <Route path="/profile" element={<Profilo/>}/>
+            <Route path="/ElencoRichieste" element={<ElencoRichieste/>}/>
           </Route>
         </Routes>
 

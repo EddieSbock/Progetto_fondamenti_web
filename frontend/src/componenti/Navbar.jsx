@@ -47,7 +47,7 @@ React.useEffect(() => {
             <div className="navbar-gruppo">
             <Link className="navbar-link" to="/">Home</Link>
             {isAdmin && (
-                <Link className="navbar-link" to="/modifica-post">Nuovo Post</Link>
+                <Link className="navbar-link" to="/modifica-post">Crea Post</Link>
             )}
             </div>
             <div>

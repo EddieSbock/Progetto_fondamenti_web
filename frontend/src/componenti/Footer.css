@@ -117,3 +117,31 @@
     width: 310px;
     height: auto;
 }
+
+.bottone-richieste {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-family: inherit;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--nero);
+    background-color: var(--giallo);
+    border: 4px solid var(--nero);
+    box-shadow: 5px 5px 0 var(--nero);
+    transition: all 0.2s ease
+}
+
+.bottone-richieste:hover {
+    color: var(--bianco);
+    background-color: var(--rosso);
+    transform: scale(1.01);
+    box-shadow: 7px 7px 0 var(--nero);
+}
+
+.bottone-richieste:active {
+    transform: translate(4px, 4px);
+    box-shadow: 1px 1px 0 var(--nero);
+}

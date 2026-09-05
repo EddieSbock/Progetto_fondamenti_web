@@ -8,6 +8,7 @@
     --giallo: #ffd23f;
     --giallo-scuro: #f2b900;
     --celeste: #2ec4b6;
+    --celeste-scuro: #24998d;
     --rosso: #ff5a5f;
     --rosa: #ff70a6;
     --grigio-chiaro: #e9dfc9;
@@ -47,9 +48,47 @@ body {
 }
 
 .bottone-form {
+    font-family: inherit;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
     background-color: var(--celeste);
     border: 3px solid var(--nero);
     border-radius: 0;
     box-shadow: 4px 4px 0 var(--nero);
     height: 40px;
+    transition: all 0.3 ease;
+}
+
+.bottone-form:hover {
+    background-color: var(--celeste-scuro);
+}
+
+.bottone-form:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+.occhio-password {
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--nero);
+    background-color: var(--giallo);
+    border: 3px solid var(--nero);
+    border-radius: 0;
+    box-shadow: 3px 3px 0 var(--nero);
+    cursor: pointer;
+    transition: all 0.3s ease
+}
+
+.occhio-password:hover {
+    background-color: var(--giallo-scuro);
+}
+
+.occhio-password:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
 }
