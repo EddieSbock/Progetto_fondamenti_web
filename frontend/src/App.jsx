@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Esporta_contesto } from './contesto/AuthContext'
@@ -9,6 +8,8 @@ import Registrazione from './pagine/Registrazione'
 import ModificaPost from './pagine/ModificaPost'
 import VisualizzaPost from './pagine/VisualizzaPost'
 import Profilo from './pagine/Profilo'
+import { Footer } from './componenti/Footer'
+import { ProtezioneRotte } from './utility/ProtezioneRotte'
 import './App.css'
 
 function App() {
@@ -32,11 +33,15 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registrazione" element={<Registrazione />} />
-          <Route path="/modifica-post" element={<ModificaPost />} />
-          <Route path="/modifica-post/:id" element={<ModificaPost />} />
-          <Route path="/post/:id" element={<VisualizzaPost />} />
-          <Route path="/profile" element={<Profilo/>}/>
+          <Route element={<ProtezioneRotte/>}>
+            <Route path="/modifica-post" element={<ModificaPost />} />
+            <Route path="/modifica-post/:id" element={<ModificaPost />} />
+            <Route path="/post/:id" element={<VisualizzaPost />} />
+            <Route path="/profile" element={<Profilo/>}/>
+          </Route>
         </Routes>
+
+        <Footer/>
       </Router>   
     </Esporta_contesto>
   )
