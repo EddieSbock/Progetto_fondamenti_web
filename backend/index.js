@@ -266,7 +266,10 @@ app.post("/api/commento", verificaJWT, async (req, res) => {
 app.delete("/api/commento/:id", verificaJWT, verificaRuolo('admin'), async (req, res) => {
     try {
         const { id } = req.params;
-        await Comment.findByIdAndDelete(id);
+        const eliminato = await Comment.findByIdAndDelete(id);
+
+        const postId = eliminato.post._id
+        req.SocketCommenti.to(postId).emit("elimina_commento", eliminato)
         res.status(200).json({ message: "Commento eliminato" });
     } catch (error) {
         console.error(error);

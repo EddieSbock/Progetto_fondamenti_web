@@ -11,6 +11,7 @@ export function ChatCommenti({postId}) {
 
     const [commenti, setCommenti]=React.useState([])
     const [inserito, setInserito]=React.useState("")
+    const [isAdmin, setIsAdmin] = React.useState(false)
 
     const { token }=React.useContext(Contesto)
 
@@ -30,10 +31,14 @@ useEffect(() => {
     socketCommenti.on("ricevi_commento", (nuovoCommento) => {
         setCommenti((prev) => [...prev, nuovoCommento])
     })
+    socketCommenti.on("elimina_commento", (eliminato) => {
+      setCommenti((prev) => prev.filter((c) => c._id !== eliminato))
+    })
 
     return () => {
         socketCommenti.emit("uscita_pagina", postId)
         socketCommenti.off("ricevi_commento")
+        socketCommenti.off("elimina_commento")
         socketCommenti.disconnect()
     }
     }, [postId])
@@ -58,6 +63,45 @@ useEffect(() => {
         }
     }
 
+    const eliminaCommenti = async (id) => {
+
+      try {
+        await axios.delete(`http://localhost:3000/api/commento/${id}`,
+          {headers: {Authorization: `Bearer ${token}`}}
+        )
+        setCommenti((prev) => prev.filter((c) => c._id !== id))
+      } catch(errore) {
+        console.error(errore)
+      }
+    } 
+
+   
+React.useEffect(() => {
+    const handleAdmin = async () => {
+        // senza questo if parte anche con token null
+        if (!token) {
+            setIsAdmin(false);
+            return;
+        }
+
+        try {
+            const utente = await axios.get("http://localhost:3000/api/profile", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (utente && utente.data.user.ruolo === "admin") {
+                setIsAdmin(true);
+            } else {
+                setIsAdmin(false);
+            }
+        } catch (errore) {
+        console.error(errore);
+        }   
+    }
+    handleAdmin();
+}, [token]);
+
 
 return (
 
@@ -72,6 +116,13 @@ return (
                 <span className="commento-dati">
                   {new Date(commento.dataCreazione).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </span>
+                {isAdmin && <button
+                className="elimina-commenti"
+                type="button"
+                onClick={() => eliminaCommenti(commento._id)}
+                >
+                  X
+                </button>}
               </div>
               <p className="commento-testo">{commento.contenuto}</p>
             </div>

@@ -63,8 +63,9 @@
   font-size: 0.9rem;
   text-transform: uppercase;
   background-color: var(--giallo);
-  border: 1px solid var(--nero);
+  border: 2px solid var(--nero);
   padding: 1px 6px;
+  box-shadow: 2px 2px var(--nero);
 }
 
 .commento-dati {
@@ -157,4 +158,18 @@
 
 .avviso-login p {
   margin: 0;
+}
+
+.elimina-commenti {
+  background-color: var(--rosso);
+  border: 2px solid var(--nero);
+  font-weight: 800;
+  font-size: medium;
+  text-shadow: 1px 1px var(--bianco);
+
+  box-shadow: 1px 1px var(--nero);
+  transition: all 0.2 ease;
+}
+.elimina-commenti:hover {
+  box-shadow: 0 0;
 }
