@@ -9,6 +9,7 @@ import { verificaJWT, verificaRuolo } from "./middleware/auth.js";
 import { User } from "./models/User.js";
 import { Post } from "./models/Post.js";
 import { Comment } from "./models/Comment.js";
+import { Richieste } from "./models/Richieste.js"
 
 
 dotenv.config(); //carica le variabili in .env
@@ -101,7 +102,7 @@ app.get("/api/profile/password", verificaJWT, async (req,res) => {
         const password = await User.findById(req.user._id).select("password");
         res.status(200).json({password})
     } catch(errore) {
-        console.error(error);
+        console.error(errore);
         res.status(500).json({ message: "Errore riprova" });
     }
 })
@@ -269,6 +270,32 @@ app.delete("/api/commento/:id", verificaJWT, verificaRuolo('admin'), async (req,
         res.status(500).json({ message: "Errore riprova" });
     }
 });
+
+app.get("/api/richieste", verificaJWT, verificaRuolo('admin'),async (req, res) => {
+    try {
+        const richieste = await Richieste.find().populate("user", "nome email");
+        res.status(200).json({ message: "Richieste recuperati", richieste });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Errore riprova" });
+    }
+})
+app.post("/api/richieste", verificaJWT, async (req, res) => {
+   
+    try {
+        const { motivo } = req.body;
+        const user= req.user._id;
+        const richiesta = new Richieste({
+            user,
+            motivo
+        })
+
+        await richiesta.save();
+        res.status(201).json({ message: "Richiesta inviata" });
+        } catch (error) {
+        res.status(500).json({ message: "Errore" });
+    }
+})
 
 
 
