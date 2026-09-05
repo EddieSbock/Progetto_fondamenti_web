@@ -10,6 +10,8 @@ import { User } from "./models/User.js";
 import { Post } from "./models/Post.js";
 import { Comment } from "./models/Comment.js";
 import { Richieste } from "./models/Richieste.js"
+import swaggerUi from "swagger-ui-express"
+import swaggerFile from "./swaggerFile.json" with {type: "json"}
 
 
 dotenv.config(); //carica le variabili in .env
@@ -25,6 +27,7 @@ db.once('open', () => {console.log('Connessione avvenuta con mongoose')});
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 const server = http.createServer(app);
 initSocket(server);
