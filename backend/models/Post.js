@@ -9,7 +9,7 @@ const SchemaPost = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 10,
-        maxlength: 1000,
+        maxlength: 5000,
     },
 
     //implementare poi degli array per registri e cast
