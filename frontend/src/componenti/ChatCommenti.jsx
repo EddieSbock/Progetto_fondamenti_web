@@ -5,7 +5,8 @@ import { Contesto } from "../contesto/AuthContext.jsx"
 import { useEffect } from "react";
 import "./ChatCommenti.css"
 
-const socketCommenti = io("http://localhost:3000")
+const url_backend = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
+const socketCommenti = io(url_backend)
 
 export function ChatCommenti({postId}) {
 
@@ -18,7 +19,7 @@ export function ChatCommenti({postId}) {
 useEffect(() => {
     const caricaCommenti = async () => {
         try {
-            const precedenti = await axios.get(`http://localhost:3000/api/commento/${postId}`)
+            const precedenti = await axios.get(`/api/commento/${postId}`)
             setCommenti(precedenti.data.commenti || [])
         } catch(errore){
             console.error(errore)
@@ -51,7 +52,7 @@ useEffect(() => {
     const inviaCommenti = async (e) => {
         e.preventDefault();
         try {
-            const inviato= await axios.post("http://localhost:3000/api/commento", {contenuto: inserito, postId: postId}, {
+            const inviato= await axios.post("/api/commento", {contenuto: inserito, postId: postId}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -66,7 +67,7 @@ useEffect(() => {
     const eliminaCommenti = async (id) => {
 
       try {
-        await axios.delete(`http://localhost:3000/api/commento/${id}`,
+        await axios.delete(`/api/commento/${id}`,
           {headers: {Authorization: `Bearer ${token}`}}
         )
         setCommenti((prev) => prev.filter((c) => c._id !== id))
@@ -85,7 +86,7 @@ React.useEffect(() => {
         }
 
         try {
-            const utente = await axios.get("http://localhost:3000/api/profile", {
+            const utente = await axios.get("/api/profile", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

@@ -17,7 +17,7 @@ import swaggerFile from "./swaggerFile.json" with {type: "json"}
 dotenv.config(); //carica le variabili in .env
 
 const app = express();
-const port = 3000;
+const port = process.env.port || 3000;
 
 mongoose.connect(process.env['db-uri']) //connette mongoose al db
     .catch(error => console.error('errore di connessione al db')) 

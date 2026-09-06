@@ -23,7 +23,7 @@ useEffect(() => {
 
     const handleFooter = async () => {
         try {
-            const utente = await axios.get("http://localhost:3000/api/profile", {
+            const utente = await axios.get("/api/profile", {
                 headers: {Authorization: `Bearer ${token}`}
             })
             setNome(utente.data.user.nome);
@@ -44,7 +44,7 @@ useEffect(() => {
 const handleForm = async (e) => {
     e.preventDefault()
         try {
-            await axios.post("http://localhost:3000/api/richieste", {motivo}, {
+            await axios.post("/api/richieste", {motivo}, {
                 headers: {Authorization: `Bearer ${token}`}
             })
             setMotivo("")

@@ -22,7 +22,7 @@ React.useEffect(() => {
     const handlePost = async () => {
         try {
 
-            const HomePost = await axios.get("http://localhost:3000/api/post",{
+            const HomePost = await axios.get("/api/post",{
                     params: {
                         categoria: categoria || undefined,
                         ricerca: ricerca || undefined,
@@ -42,7 +42,7 @@ React.useEffect(() => {
 React.useEffect(() => {
     const handleTopPost = async () => {
         try {
-            const TopPost = await axios.get("http://localhost:3000/api/post/top")
+            const TopPost = await axios.get("/api/post/top")
             setTopPost(TopPost.data.miglioriPost)
         } catch (errore) {
             console.error(errore)

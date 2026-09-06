@@ -25,7 +25,7 @@ React.useEffect(() => {
         }
 
         try {
-            const utente = await axios.get("http://localhost:3000/api/profile", {
+            const utente = await axios.get("/api/profile", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

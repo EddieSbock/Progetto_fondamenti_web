@@ -12,7 +12,7 @@ export function ElencoRichieste() {
 useEffect(() => {
     const handleRichieste = async () => {
         try {
-            const risposta = await axios.get("http://localhost:3000/api/richieste", 
+            const risposta = await axios.get("/api/richieste", 
                 {headers: {Authorization: `Bearer ${token}`}}
             )
             setRichieste(risposta.data.richieste);
@@ -26,10 +26,10 @@ useEffect(() => {
 
 const handleApprova = async (richiesta) => {
     try {
-        await axios.patch(`http://localhost:3000/api/richieste/${richiesta._id}`,{},
+        await axios.patch(`/api/richieste/${richiesta._id}`,{},
             {headers: {Authorization: `Bearer ${token}`}}
         )
-        await axios.delete(`http://localhost:3000/api/richieste/${richiesta._id}`,
+        await axios.delete(`/api/richieste/${richiesta._id}`,
             {headers: {Authorization: `Bearer ${token}`}}
         )
         setRichieste((precedenti) => precedenti.filter((e) => e._id !== richiesta._id))

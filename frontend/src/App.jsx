@@ -15,7 +15,7 @@ import './App.css'
 
 function App() {
 
-  const response = axios.get('http://localhost:3000/api/hello')
+  const response = axios.get('/api/hello')
     .then((response) => {
       console.log(response.data)
     })

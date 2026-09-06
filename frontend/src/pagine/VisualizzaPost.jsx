@@ -18,7 +18,7 @@ export default function VisualizzaPost() {
 React.useEffect(() => {
     const handlePost = async () => {
         try {
-            const risposta = await axios.get(`http://localhost:3000/api/post/${id}`);
+            const risposta = await axios.get(`/api/post/${id}`);
             setPost(risposta.data.post);
         } catch (errore) {
             console.error(errore);
@@ -36,7 +36,7 @@ React.useEffect(() => {
         }
 
         try {
-            const utente = await axios.get("http://localhost:3000/api/profile", {
+            const utente = await axios.get("/api/profile", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -56,7 +56,7 @@ React.useEffect(() => {
     const handleDelete = async () => {
 
         try {
-            await axios.delete(`http://localhost:3000/api/post/${id}`, {
+            await axios.delete(`/api/post/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

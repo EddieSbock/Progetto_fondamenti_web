@@ -22,7 +22,7 @@ React.useEffect(() => {
         if(!token) return;
 
         try {
-            const risposta = await axios.get("http://localhost:3000/api/profile",
+            const risposta = await axios.get("/api/profile",
                 {headers: {Authorization: `Bearer ${token}`}}
             )
             
@@ -40,7 +40,7 @@ React.useEffect(() => {
 const modificaProfilo = async () => {
 
         try {
-            await axios.patch("http://localhost:3000/api/profile",
+            await axios.patch("/api/profile",
                 {nome,email},
                 {headers: {Authorization: `Bearer ${token}`}}
             );
@@ -52,7 +52,7 @@ const modificaProfilo = async () => {
 
 const modificaPassword = async () => {
         try {
-            await axios.patch("http://localhost:3000/api/profile/password",
+            await axios.patch("/api/profile/password",
                 {password, nuovaPassword},
                 {headers: {Authorization: `Bearer ${token}`}}
             );

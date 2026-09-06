@@ -32,7 +32,7 @@ export default function GestionePost() {
     if (id) {
       const recuperaPost = async () => {
         try {
-          const post = await axios.get(`http://localhost:3000/api/post/${id}`);
+          const post = await axios.get(`/api/post/${id}`);
           const p = post.data.post;
           setForm({
             titolo: p.titolo,
@@ -73,7 +73,7 @@ export default function GestionePost() {
     try {
 
       if (id) {
-        await axios.patch(`http://localhost:3000/api/post/${id}`, form, {
+        await axios.patch(`/api/post/${id}`, form, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -81,7 +81,7 @@ export default function GestionePost() {
         navigate(`/post/${id}`);
       } else {
         
-        const creato = await axios.post("http://localhost:3000/api/post", form, {
+        const creato = await axios.post("/api/post", form, {
           headers: {
             Authorization: `Bearer ${token}`
           }
