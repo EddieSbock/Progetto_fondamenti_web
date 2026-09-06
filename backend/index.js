@@ -25,7 +25,7 @@ mongoose.connect(process.env['db-uri']) //connette mongoose al db
 const db = mongoose.connection;  //connessione al db con mongoose
 db.once('open', () => {console.log('Connessione avvenuta con mongoose')});
 
-app.use(cors());
+app.use(cors({origin: "*"}));
 app.use(express.json());
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
